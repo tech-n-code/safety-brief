@@ -8,7 +8,8 @@ CREATE TABLE usr (
     id SERIAL PRIMARY KEY,
     username VARCHAR(25) NOT NULL,
     email VARCHAR(25) NOT NULL,
-    password VARCHAR(25) NOT NULL
+    password VARCHAR(25) NOT NULL,
+    pic_url TEXT
 );
 
 CREATE TABLE brief (
@@ -25,11 +26,6 @@ CREATE TABLE dont (
     id SERIAL PRIMARY KEY,
     cat VARCHAR(25) NOT NULL,
     descr VARCHAR(200) NOT NULL,
-    brief_id INT,
-    CONSTRAINT fk_brief
-        FOREIGN KEY(brief_id)
-        REFERENCES brief(id)
-        ON DELETE CASCADE
 );
 
 CREATE TABLE brief_dont (
