@@ -25,7 +25,7 @@ CREATE TABLE brief (
 CREATE TABLE dont (
     id SERIAL PRIMARY KEY,
     cat VARCHAR(25) NOT NULL,
-    descr VARCHAR(200) NOT NULL,
+    descr VARCHAR(200) NOT NULL
 );
 
 CREATE TABLE brief_dont (
