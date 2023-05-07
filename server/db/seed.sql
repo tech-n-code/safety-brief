@@ -1,6 +1,6 @@
-INSERT INTO usr (username, email, password) VALUES ('slick150', '123@123.com', '12345678');
-INSERT INTO usr (username, email, password) VALUES ('anabel', '123@123.com', '12345678');
-INSERT INTO usr (username, email, password) VALUES ('outdoorsGuy', '123@123.com', '12345678');
+INSERT INTO usr (username, email, password, pic_url) VALUES ('slick150', '123@123.com', '12345678', 'https://xsgames.co/randomusers/assets/avatars/male/78.jpg');
+INSERT INTO usr (username, email, password, pic_url) VALUES ('anabel', '123@123.com', '12345678', 'https://xsgames.co/randomusers/assets/avatars/female/36.jpg');
+INSERT INTO usr (username, email, password, pic_url) VALUES ('outdoorsGuy', '123@123.com', '12345678', 'https://xsgames.co/randomusers/assets/avatars/male/76.jpg');
 
 INSERT INTO brief (title, usr_id) VALUES ('4 Day Weekend', 1);
 INSERT INTO brief (title, usr_id) VALUES ('Girls Scouts Hike', 2);
