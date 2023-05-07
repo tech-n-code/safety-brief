@@ -100,6 +100,21 @@ app.get("/api/safety-brief/dont", (req, res) => {
                 res.json(result.rows);
             }
         });
+    /* All DONTs in a brief ordered by category --> /api/safety-brief/dont?briefID <-- */
+    } else if(req.query.briefID) {
+        const briefID = req.query.briefID;
+        pool.query(`SELECT dont.* FROM dont INNER JOIN brief_dont ON dont.id = brief_dont.dont_id WHERE brief_dont.brief_id = $1`, [briefID], (err, result) => {
+            if (err) {
+                console.error(err);
+                res.status(500).send(`Error reading DONT or BRIEF_DONT tables`);
+            } else if (result.rows.length === 0) {
+                console.log(`DONT with brief_id ${id} was not found`);
+                res.status(404).send(`DONT with brief_id ${id} was not found`);
+            } else {
+                console.log(result.rows);
+                res.json(result.rows);
+            }
+        });
     /* All DONTs ordered by category --> /api/safety-brief/dont <-- */
     } else {
         pool.query(`SELECT * FROM dont ORDER BY cat`, (err, result) => {
@@ -109,40 +124,6 @@ app.get("/api/safety-brief/dont", (req, res) => {
             } else if (result.rows.length === 0) {
                 console.log(`DONT table not found`);
                 res.status(404).send(`DONT table not found`);
-            } else {
-                console.log(result.rows);
-                res.json(result.rows);
-            }
-        });
-    }
-});
-
-app.get("/api/safety-brief/brief_dont", (req, res) => {
-    /* BRIEF_DONT by brief_id --> /api/safety-brief/brief_dont?briefID=2 <-- */
-    if (req.query.briefID) {
-        console.log(req.query);
-        const briefID = req.query.briefID;
-        pool.query(`SELECT * FROM brief_dont WHERE brief_id = $1`, [briefID], (err, result) => {
-            if (err) {
-                console.error(err);
-                res.status(500).send(`Error reading BRIEF_DONT table`);
-            } else if (result.rows.length === 0) {
-                console.log(`BRIEF_DONT with brief_id ${briefID} was not found`);
-                res.status(404).send(`BRIEF_DONT with brief_id ${briefID} was not found`);
-            } else {
-                console.log(result.rows);
-                res.json(result.rows);
-            }
-        });
-    /* All BRIEF_DONT rows  --> /api/safety-brief/brief_dont <-- */
-    } else {
-        pool.query(`SELECT * FROM brief_dont`, (err, result) => {
-            if (err) {
-                console.error(err);
-                res.status(500).send(`Error reading BRIEF_DONT table`)
-            } else if (result.rows.length === 0) {
-                console.log(`BRIEF_DONT table not found`);
-                res.status(404).send(`BRIEF_DONT table not found`);
             } else {
                 console.log(result.rows);
                 res.json(result.rows);
