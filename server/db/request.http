@@ -18,9 +18,6 @@ GET http://localhost:3000/api/safety-brief/brief?id=2
 GET http://localhost:3000/api/safety-brief/dont
 
 
-### All BRIEF_DONT rows
-GET http://localhost:3000/api/safety-brief/brief_dont
+### All DONTs in a BRIEF by brief_id
+GET http://localhost:3000/api/safety-brief/dont?briefID=2
 
-
-### BRIEF_DONT by brief_id
-GET http://localhost:3000/api/safety-brief/brief_dont?briefID=3
