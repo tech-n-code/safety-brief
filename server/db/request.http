@@ -1,0 +1,26 @@
+### All USERs
+GET http://localhost:3000/api/safety-brief/usr
+
+
+### USER by id
+GET http://localhost:3000/api/safety-brief/usr?id=2
+
+
+### All BRIEFs
+GET http://localhost:3000/api/safety-brief/brief
+
+
+### BRIEF by id
+GET http://localhost:3000/api/safety-brief/brief?id=2
+
+
+### All DONTs
+GET http://localhost:3000/api/safety-brief/dont
+
+
+### All BRIEF_DONT rows
+GET http://localhost:3000/api/safety-brief/brief_dont
+
+
+### BRIEF_DONT by brief_id
+GET http://localhost:3000/api/safety-brief/brief_dont?briefID=3
