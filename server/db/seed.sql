@@ -66,7 +66,10 @@ INSERT INTO brief_dont (brief_id, dont_id) VALUES (1, 4);
 INSERT INTO brief_dont (brief_id, dont_id) VALUES (1, 5);
 INSERT INTO brief_dont (brief_id, dont_id) VALUES (1, 6);
 INSERT INTO brief_dont (brief_id, dont_id) VALUES (1, 7);
+INSERT INTO brief_dont (brief_id, dont_id) VALUES (1, 19);
+INSERT INTO brief_dont (brief_id, dont_id) VALUES (1, 24);
 
+INSERT INTO brief_dont (brief_id, dont_id) VALUES (2, 4);
 INSERT INTO brief_dont (brief_id, dont_id) VALUES (2, 24);
 INSERT INTO brief_dont (brief_id, dont_id) VALUES (2, 25);
 INSERT INTO brief_dont (brief_id, dont_id) VALUES (2, 26);
@@ -74,6 +77,7 @@ INSERT INTO brief_dont (brief_id, dont_id) VALUES (2, 27);
 INSERT INTO brief_dont (brief_id, dont_id) VALUES (2, 28);
 INSERT INTO brief_dont (brief_id, dont_id) VALUES (2, 29);
 INSERT INTO brief_dont (brief_id, dont_id) VALUES (2, 30);
+INSERT INTO brief_dont (brief_id, dont_id) VALUES (2, 44);
 
 INSERT INTO brief_dont (brief_id, dont_id) VALUES (3, 8);
 INSERT INTO brief_dont (brief_id, dont_id) VALUES (3, 9);
@@ -86,6 +90,7 @@ INSERT INTO brief_dont (brief_id, dont_id) VALUES (3, 15);
 INSERT INTO brief_dont (brief_id, dont_id) VALUES (3, 16);
 INSERT INTO brief_dont (brief_id, dont_id) VALUES (3, 17);
 INSERT INTO brief_dont (brief_id, dont_id) VALUES (3, 18);
+INSERT INTO brief_dont (brief_id, dont_id) VALUES (3, 26);
 
 INSERT INTO fave (usr_id, dont_id) VALUES (1, 1);
 INSERT INTO fave (usr_id, dont_id) VALUES (1, 7);
