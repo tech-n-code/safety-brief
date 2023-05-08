@@ -56,7 +56,7 @@ GET http://localhost:3000/api/safety-brief/dont
 GET http://localhost:3000/api/safety-brief/dont?briefID=4
 
 
-### All categories in DONT table
+### All categories and QTY in DONT table
 GET http://localhost:3000/api/safety-brief/dont/cat
 
 
