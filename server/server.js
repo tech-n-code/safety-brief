@@ -195,7 +195,7 @@ app.get("/api/safety-brief/dont", (req, res) => {
 /* All categories in DONT table --> /api/safety-brief/dont/cat <-- */
 app.get("/api/safety-brief/dont/cat", (req, res) => {
     console.log(req.query);
-    pool.query(`SELECT DISTINCT cat FROM dont`, (err, result) => {
+    pool.query(`SELECT cat, COUNT(*) AS qty FROM dont GROUP BY cat`, (err, result) => { //SELECT DISTINCT cat FROM dont
         if (err) {
             console.error(err);
             res.status(500).send(`Error reading DONT table`);
