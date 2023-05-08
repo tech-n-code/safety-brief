@@ -1,5 +1,5 @@
 DROP TABLE IF EXISTS usr CASCADE;
-DROP TABLE IF EXISTS brief;
+DROP TABLE IF EXISTS brief CASCADE;
 DROP TABLE IF EXISTS dont;
 DROP TABLE IF EXISTS brief_dont;
 DROP TABLE IF EXISTS fave;
@@ -31,6 +31,8 @@ CREATE TABLE dont (
 CREATE TABLE brief_dont (
     brief_id INT,
     dont_id INT,
+    checked BOOLEAN DEFAULT FALSE,
+    PRIMARY KEY (brief_id, dont_id),
     CONSTRAINT fk_brief
         FOREIGN KEY(brief_id)
         REFERENCES brief(id)
