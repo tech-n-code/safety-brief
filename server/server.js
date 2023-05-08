@@ -15,7 +15,10 @@ const pool = new Pool({
 
 app.use(express.json());
 
-/* USER by ID --> /api/safety-brief/usr?id=2 <-- */
+/**
+ * USER by ID
+ * /api/safety-brief/usr?id=2
+ */
 app.get("/api/safety-brief/usr", (req, res) => {
     if (req.query.id) {
         console.log(req.query);
@@ -32,7 +35,10 @@ app.get("/api/safety-brief/usr", (req, res) => {
                 res.json(result.rows);
             }
         });
-    /* All USERs ordered by username --> /api/safety-brief/usr <-- */
+    /**
+     * All USERs ordered by username
+     * /api/safety-brief/usr
+     */
     } else {
         pool.query(`SELECT * FROM usr ORDER BY username`, (err, result) => {
             if (err) {
@@ -49,7 +55,10 @@ app.get("/api/safety-brief/usr", (req, res) => {
     }
 });
 
-/* Create USER --> /api/safety-brief/usr <-- */
+/**
+ * Create USER
+ * /api/safety-brief/usr
+ */
 app.post("/api/safety-brief/usr", (req, res) => {
     const { username, email, password, pic_url } = req.body;
     pool.query("INSERT INTO usr (username, email, password, pic_url) VALUES ($1, $2, $3, $4) RETURNING *", [username, email, password, pic_url], (err, result) => {
@@ -64,7 +73,10 @@ app.post("/api/safety-brief/usr", (req, res) => {
     });
 });
 
-/* Delete USER by ID --> /api/safety-brief/brief/2 <-- */
+/**
+ * Delete USER by ID
+ * /api/safety-brief/brief/2
+ */
 app.delete("/api/safety-brief/usr/:id", (req, res) => {
     const id = req.params.id;
     pool.query("DELETE FROM usr WHERE id = $1 RETURNING *", [id], (err, result) => {
@@ -73,13 +85,16 @@ app.delete("/api/safety-brief/usr/:id", (req, res) => {
             res.status(500).send("Error deleting USER");
         } else {
             console.log(result.rows);
-            console.log(`USER with id ${result.rows[0].id} deleted successfully`); //confirm
+            console.log(`USER with id ${result.rows[0].id} deleted successfully`); //'undefined'?
             res.status(200).json(result.rows);
         }
     });
 });
 
-/* BRIEF by ID --> /api/safety-brief/brief?id=2 <-- */
+/**
+ * BRIEF by ID
+ * /api/safety-brief/brief?id=2
+ */
 app.get("/api/safety-brief/brief", (req, res) => {
     if (req.query.id) {
         console.log(req.query);
@@ -96,7 +111,10 @@ app.get("/api/safety-brief/brief", (req, res) => {
                 res.json(result.rows);
             }
         });
-    /* All BRIEFs ordered by title --> /api/safety-brief/brief <-- */
+    /**
+     * All BRIEFs ordered by title
+     * /api/safety-brief/brief
+     */
     } else {
         pool.query(`SELECT * FROM brief ORDER BY title`, (err, result) => {
             if (err) {
@@ -113,7 +131,10 @@ app.get("/api/safety-brief/brief", (req, res) => {
     }
 });
 
-/* Create BRIEF --> /api/safety-brief/brief <-- */
+/**
+ * Create BRIEF
+ * /api/safety-brief/brief
+ */
 app.post("/api/safety-brief/brief", (req, res) => {
     const { title, usr_id } = req.body;
     pool.query("INSERT INTO brief (title, usr_id) VALUES ($1, $2) RETURNING *", [title, usr_id], (err, result) => {
@@ -128,7 +149,10 @@ app.post("/api/safety-brief/brief", (req, res) => {
     });
 });
 
-/* Delete BRIEF by ID --> /api/safety-brief/brief/2 <-- */
+/**
+ * Delete BRIEF by ID
+ * /api/safety-brief/brief/2
+ */
 app.delete("/api/safety-brief/brief/:id", (req, res) => {
     const id = req.params.id;
     pool.query("DELETE FROM brief WHERE id = $1 RETURNING *", [id], (err, result) => {
@@ -137,13 +161,16 @@ app.delete("/api/safety-brief/brief/:id", (req, res) => {
             res.status(500).send("Error deleting BRIEF");
         } else {
             console.log(result.rows);
-            console.log(`BRIEF with id ${result.rows[0].id} deleted successfully`); //confirm
+            console.log(`BRIEF with id ${result.rows[0].id} deleted successfully`); //'undefined'?
             res.status(200).json(result.rows);
         }
     });
 });
 
-/* DONT by ID --> /api/safety-brief/dont?id=2 <-- */
+/**
+ * DONT by ID
+ * /api/safety-brief/dont?id=2
+ */
 app.get("/api/safety-brief/dont", (req, res) => {
     if (req.query.id) {
         console.log(req.query);
@@ -160,7 +187,10 @@ app.get("/api/safety-brief/dont", (req, res) => {
                 res.json(result.rows);
             }
         });
-    /* All DONTs in a BRIEF ordered by category --> /api/safety-brief/dont?briefID=3 <-- */
+    /**
+     * All DONTs in a BRIEF ordered by category
+     * /api/safety-brief/dont?briefID=3
+     */
     } else if(req.query.briefID) {
         const briefID = req.query.briefID;
         pool.query(`SELECT dont.*, brief_dont.checked FROM dont INNER JOIN brief_dont ON dont.id = brief_dont.dont_id WHERE brief_dont.brief_id = $1`, [briefID], (err, result) => {
@@ -175,7 +205,10 @@ app.get("/api/safety-brief/dont", (req, res) => {
                 res.json(result.rows);
             }
         });
-    /* All DONTs ordered by category --> /api/safety-brief/dont <-- */
+    /**
+     * All DONTs ordered by category
+     * /api/safety-brief/dont
+     */
     } else {
         pool.query(`SELECT * FROM dont ORDER BY cat`, (err, result) => {
             if (err) {
@@ -192,10 +225,13 @@ app.get("/api/safety-brief/dont", (req, res) => {
     }
 });
 
-/* All categories in DONT table --> /api/safety-brief/dont/cat <-- */
+/**
+ * All categories in DONT table
+ * /api/safety-brief/dont/cat
+ */
 app.get("/api/safety-brief/dont/cat", (req, res) => {
     console.log(req.query);
-    pool.query(`SELECT cat, COUNT(*) AS qty FROM dont GROUP BY cat`, (err, result) => { //SELECT DISTINCT cat FROM dont
+    pool.query(`SELECT cat, COUNT(*) AS qty FROM dont GROUP BY cat`, (err, result) => {
         if (err) {
             console.error(err);
             res.status(500).send(`Error reading DONT table`);
@@ -209,7 +245,10 @@ app.get("/api/safety-brief/dont/cat", (req, res) => {
     });
 });
 
-/* Add x-ammount of random DONTs to BRIEF from category --> /api/safety-brief/brief_dont <-- */
+/**
+ * Add x-ammount of random DONTs to BRIEF from category
+ * /api/safety-brief/brief_dont
+ */
 app.post("/api/safety-brief/brief_dont", (req, res) => {
     const { brief_id, cat, num_donts } = req.body;
     pool.query("INSERT INTO brief_dont (brief_id, dont_id, checked) SELECT $1, id, FALSE FROM dont WHERE cat = $2 AND id NOT IN (SELECT dont_id FROM brief_dont WHERE brief_id = $1) ORDER BY RANDOM() LIMIT $3 RETURNING *", [brief_id, cat, num_donts], (err, result) => {
@@ -224,7 +263,10 @@ app.post("/api/safety-brief/brief_dont", (req, res) => {
     });
 });
 
-/* Delete DONT from BRIEF by <brief_id/dont_id> --> /api/safety-brief/brief_dont/3/10 <-- */
+/**
+ * Delete DONT from BRIEF by <brief_id/dont_id>
+ * /api/safety-brief/brief_dont/3/10
+ */
 app.delete("/api/safety-brief/brief_dont/:briefID/:dontID", (req, res) => {
     const briefID = req.params.briefID;
     const dontID = req.params.dontID;
@@ -234,13 +276,16 @@ app.delete("/api/safety-brief/brief_dont/:briefID/:dontID", (req, res) => {
             res.status(500).send("Error deleting DONT");
         } else {
             console.log(result.rows);
-            console.log(`DONT with usr_id ${result.rows[0].id} deleted successfully`); //fix
+            console.log(`DONT with usr_id ${result.rows[0].id} deleted successfully`); //'undefined'?
             res.status(200).json(result.rows);
         }
     });
 });
 
-/* All FAVEs for a usr_id --> /api/safety-brief/fave?usrID <-- */
+/**
+ * All FAVEs for a usr_id
+ * /api/safety-brief/fave?usrID=2
+ */
 app.get("/api/safety-brief/fave", (req, res) => {
     const id = req.query.usrID;
     pool.query("SELECT fave.dont_id, dont.cat, dont.descr FROM fave JOIN dont ON fave.dont_id = dont.id WHERE fave.usr_id = $1", [id], (err, result) => {
@@ -257,7 +302,10 @@ app.get("/api/safety-brief/fave", (req, res) => {
     });
 });
 
-/* Add FAVE --> /api/safety-brief/fave <-- */
+/**
+ * Add FAVE
+ * /api/safety-brief/fave
+ */
 app.post("/api/safety-brief/fave", (req, res) => {
     const { usr_id, dont_id } = req.body;
     pool.query("INSERT INTO fave (usr_id, dont_id) SELECT $1, $2 WHERE NOT EXISTS (SELECT 1 FROM fave WHERE usr_id = $1 AND dont_id = $2) RETURNING *", [usr_id, dont_id], (err, result) => {
@@ -272,7 +320,10 @@ app.post("/api/safety-brief/fave", (req, res) => {
     });
 });
 
-/* Delete FAVE by <usr_id/dont_id> --> /api/safety-brief/fave/2/7 <-- */
+/**
+ * Delete FAVE by <usr_id/dont_id>
+ * /api/safety-brief/fave/2/7
+ */
 app.delete("/api/safety-brief/fave/:usrID/:dontID", (req, res) => {
     const usrID = req.params.usrID;
     const dontID = req.params.dontID;
@@ -282,7 +333,7 @@ app.delete("/api/safety-brief/fave/:usrID/:dontID", (req, res) => {
             res.status(500).send("Error deleting FAVE");
         } else {
             console.log(result.rows);
-            console.log(`FAVE with usr_id ${result.rows[0].id} deleted successfully`); //confirm
+            console.log(`FAVE with usr_id ${result.rows[0].id} deleted successfully`); //'undefined'?
             res.status(200).json(result.rows);
         }
     });
