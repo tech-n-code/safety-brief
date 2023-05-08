@@ -12,7 +12,7 @@ INSERT INTO dont (cat, descr) VALUES ('Standard', 'No means no, enough said');
 INSERT INTO dont (cat, descr) VALUES ('Standard', 'Keep local emergency numbers handy');
 INSERT INTO dont (cat, descr) VALUES ('Standard', 'Think before you post in social media');
 INSERT INTO dont (cat, descr) VALUES ('Standard', 'Don''t let arguments with your significant other turn violent; walk away, cool off, and go somewhere else');
-INSERT INTO dont (cat, descr) VALUES ('Standard', 'If you frequent places showcasing good looking people taking donations for their college education, do''t touch the mercahndise');
+INSERT INTO dont (cat, descr) VALUES ('Standard', 'If you frequent places showcasing good looking people taking donations for their college education, do''t touch the merchandise');
 
 INSERT INTO dont (cat, descr) VALUES ('Long Driving Trip', 'Don''t make a long drive in one stretch; take frequent breaks');
 INSERT INTO dont (cat, descr) VALUES ('Long Driving Trip', 'Don''t start a long drive after a full day of work');
