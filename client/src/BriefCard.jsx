@@ -2,13 +2,15 @@ import { useState, useEffect } from "react";
 import Cue from './Cue';
 
 function BriefCard(props) {
-    console.log(props)
+    // console.log(props)
     const [cuesData, setCuesData] = useState([]);
     const [favoriteCues, setFavoriteCues] = useState([]);
- 
+    // console.log("cuesData")
+    // console.log(cuesData)
+
     useEffect(() => {
         async function fetchData() {
-            const response = await fetch("http://localhost:3000/api/safety-brief/dont?briefID=" + props.id);
+            const response = await fetch("http://localhost:3000/api/safety-brief/cue?briefID=" + props.id);
             const data = await response.json();
             setCuesData(data);
         }
@@ -44,7 +46,7 @@ function BriefCard(props) {
                             checked={cueData.checked}
                             usr_id={props.usr_id}
                             brief_id={props.id}
-                            isFavorite={favoriteCues.some(fav => fav.dont_id === cueData.id)}
+                            isFavorite={favoriteCues.some(fav => fav.cue_id === cueData.id)}
                             removeCue={removeCue}
                         />
                     ))}
