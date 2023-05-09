@@ -30,7 +30,7 @@ GET http://localhost:3000/api/safety-brief/brief
 GET http://localhost:3000/api/safety-brief/brief?id=2
 
 
-### BRIEF by usr_id
+### All BRIEFs under a usr_id
 GET http://localhost:3000/api/safety-brief/brief?usrID=2
 
 
@@ -57,7 +57,7 @@ GET http://localhost:3000/api/safety-brief/dont
 
 
 ### All DONTs in a BRIEF by brief_id ordered by category
-GET http://localhost:3000/api/safety-brief/dont?briefID=4
+GET http://localhost:3000/api/safety-brief/dont?briefID=1
 
 
 ### All categories and QTY in DONT table
