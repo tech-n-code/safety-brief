@@ -15,6 +15,22 @@ const pool = new Pool({
 
 app.use(express.json());
 
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+    next();
+});
+
+app.options('*', (req, res) => {
+    res.set('Access-Control-Allow-Origin', 'http://localhost:5173/');
+    res.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.set('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With');
+    res.status(200).send();
+});
+
+
+
 /**
  * USER by ID
  * /api/safety-brief/usr?id=2
@@ -112,7 +128,7 @@ app.get("/api/safety-brief/brief", (req, res) => {
             }
         });
     /**
-     * BRIEF by usr_id
+     * All BRIEFs under a usr_id
      * /api/safety-brief/brief?usrID=2
      */
     } else if (req.query.usrID) {
