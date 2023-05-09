@@ -31,7 +31,7 @@ GET http://localhost:3000/api/safety-brief/brief?id=2
 
 
 ### All BRIEFs under a usr_id
-GET http://localhost:3000/api/safety-brief/brief?usrID=3
+GET http://localhost:3000/api/safety-brief/brief?usrID=2
 
 
 ### Create BRIEF
@@ -45,38 +45,38 @@ Content-Type: application/json
 
 
 ### Delete BRIEF by id
-DELETE http://localhost:3000/api/safety-brief/brief/4
+DELETE http://localhost:3000/api/safety-brief/brief/5
 
 
-### DONT by dont_id
-GET http://localhost:3000/api/safety-brief/dont?id=2
+### CUE by cue_id
+GET http://localhost:3000/api/safety-brief/cue?id=2
 
 
-### All DONTs ordered by category
-GET http://localhost:3000/api/safety-brief/dont
+### All CUEs ordered by category
+GET http://localhost:3000/api/safety-brief/cue
 
 
-### All DONTs in a BRIEF by brief_id ordered by category
-GET http://localhost:3000/api/safety-brief/dont?briefID=1
+### All CUEs in a BRIEF by brief_id ordered by category
+GET http://localhost:3000/api/safety-brief/cue?briefID=13
 
 
-### All categories and QTY in DONT table
-GET http://localhost:3000/api/safety-brief/dont/cat
+### All categories and QTY in CUE table
+GET http://localhost:3000/api/safety-brief/cue/cat
 
 
-### Add x-ammount of random DONTs to BRIEF from categoty
-POST http://localhost:3000/api/safety-brief/brief_dont
+### Add x-ammount of random CUEs to BRIEF from categoty
+POST http://localhost:3000/api/safety-brief/brief_cue
 Content-Type: application/json
 
 {
-    "brief_id": 5,
+    "brief_id": 7,
     "cat": "Long Driving Trip",
-    "num_donts": 3
+    "num_cues": 3
 }
 
 
-### Update DONT in a BRIEF by <usr_id/dont_id>
-PATCH http://localhost:3000/api/safety-brief/brief_dont/1/3
+### Update CUE in a BRIEF by <usr_id/cue_id>
+PATCH http://localhost:3000/api/safety-brief/brief_cue/1/3
 Content-Type: application/json
 
 {
@@ -84,12 +84,12 @@ Content-Type: application/json
 }
 
 
-### Delete DONT from BRIEF by <brief_id/dont_id>
-DELETE http://localhost:3000/api/safety-brief/brief_dont/7/12
+### Delete CUE from BRIEF by <brief_id/cue_id>
+DELETE http://localhost:3000/api/safety-brief/brief_cue/7/12
 
 
 ### All FAVEs for usr_id
-GET http://localhost:3000/api/safety-brief/fave?usrID=1
+GET http://localhost:3000/api/safety-brief/fave?usrID=2
 
 
 ### Add FAVE
@@ -98,9 +98,9 @@ Content-Type: application/json
 
 {
     "usr_id": 1,
-    "dont_id": 15
+    "cue_id": 15
 }
 
 
-### Delete FAVE by <usr_id/dont_id>
+### Delete FAVE by <usr_id/cue_id>
 DELETE http://localhost:3000/api/safety-brief/fave/1/15
