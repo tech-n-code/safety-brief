@@ -3,7 +3,7 @@ import BriefCard from "./BriefCard";
 
 function Dashboard(props) {
     const [briefsData, setBriefsData] = useState([]);
-    const placeholder = 2; //props.usrID
+    const placeholder = 1; //props.usrID
     console.log(briefsData)
 
     useEffect(() => {
