@@ -14,7 +14,7 @@ function Cue(props) {
 
     const toggleChecked = async () => {
         setIsChecked(!isChecked);
-        const response = await fetch(`http://localhost:3000/api/safety-brief/brief_dont/${props.brief_id}/${props.id}`, {
+        const response = await fetch(`http://localhost:3000/api/safety-brief/brief_cue/${props.brief_id}/${props.id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
@@ -39,14 +39,14 @@ function Cue(props) {
                 },
                 body: JSON.stringify({
                     usr_id: props.usr_id,
-                    dont_id: props.id
+                    cue_id: props.id
                 })
             });
             if (!response.ok) {
                 console.log('Failed to add favorite');
             }
         } else {
-            // delete favorite <usr_id/dont_id>
+            // delete favorite <usr_id/cue_id>
             const response = await fetch(`http://localhost:3000/api/safety-brief/fave/${props.usr_id}/${props.id}`, {
                 method: 'DELETE'
             });
@@ -57,9 +57,9 @@ function Cue(props) {
         }
     };
   
-    //Delete DONT from BRIEF by <brief_id/dont_id>
+    //Delete CUE from BRIEF by <brief_id/cue_id>
     const handleDelete = async () => {
-        const response = await fetch(`http://localhost:3000/api/safety-brief/brief_dont/${props.brief_id}/${props.id}`, {
+        const response = await fetch(`http://localhost:3000/api/safety-brief/brief_cue/${props.brief_id}/${props.id}`, {
             method: 'DELETE'
         });
         
