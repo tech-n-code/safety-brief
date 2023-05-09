@@ -6,14 +6,26 @@ import deleteBtn from "../src/assets/x-square-fill.svg";
 function Cue(props) {
     console.log(props);
     const [isChecked, setIsChecked] = useState(props.checked);
-    const [isFavorite, setIsFavorite] = useState(false);
+    const [isFavorite, setIsFavorite] = useState(props.isFavorite);
   
     useEffect(() => {
         setIsChecked(props.checked);
     }, []);
 
-    const toggleChecked = () => {
+    const toggleChecked = async () => {
         setIsChecked(!isChecked);
+        const response = await fetch(`http://localhost:3000/api/safety-brief/brief_dont/${props.brief_id}/${props.id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                checked: !isChecked
+            })
+        });
+        if (!response.ok) {
+            console.log('Failed to update checked field');
+        }
     };
   
     const toggleFavorite = async () => {
@@ -30,7 +42,6 @@ function Cue(props) {
                     dont_id: props.id
                 })
             });
-    
             if (!response.ok) {
                 console.log('Failed to add favorite');
             }
@@ -51,7 +62,10 @@ function Cue(props) {
         const response = await fetch(`http://localhost:3000/api/safety-brief/brief_dont/${props.brief_id}/${props.id}`, {
             method: 'DELETE'
         });
-    
+        
+        //Remove Cue from BriefCard
+        props.removeCue(props.id);
+
         if (!response.ok) {
             console.log('Failed to delete cue');
         }
