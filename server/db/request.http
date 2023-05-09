@@ -31,7 +31,7 @@ GET http://localhost:3000/api/safety-brief/brief?id=2
 
 
 ### All BRIEFs under a usr_id
-GET http://localhost:3000/api/safety-brief/brief?usrID=2
+GET http://localhost:3000/api/safety-brief/brief?usrID=3
 
 
 ### Create BRIEF
@@ -40,7 +40,7 @@ Content-Type: application/json
 
 {
     "title": "Thanksgiving",
-    "usr_id": 2
+    "usr_id": 3
 }
 
 
@@ -69,7 +69,7 @@ POST http://localhost:3000/api/safety-brief/brief_dont
 Content-Type: application/json
 
 {
-    "brief_id": 4,
+    "brief_id": 5,
     "cat": "Long Driving Trip",
     "num_donts": 3
 }
