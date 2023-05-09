@@ -3,13 +3,12 @@ import BriefCard from "./BriefCard";
 
 function Dashboard(props) {
     const [briefsData, setBriefsData] = useState([]);
-    const placeholder = 3; //props.usrID
     console.log(briefsData)
 
     useEffect(() => {
         const fetchBriefs = async () => {
             try {
-                const response = await fetch("http://localhost:3000/api/safety-brief/brief?usrID=" + placeholder);
+                const response = await fetch("http://localhost:3000/api/safety-brief/brief?usrID=" + props.authUserID);
                 if (response.ok) {
                     const data = await response.json();
                     setBriefsData(data);
@@ -32,7 +31,7 @@ function Dashboard(props) {
                         key={briefData.id}
                         id={briefData.id}
                         title={briefData.title}
-                        usr_id={placeholder} //fix later
+                        usr_id={props.authUserID}
                     />
                 ))}
             </div>
