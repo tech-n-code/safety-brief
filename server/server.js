@@ -112,6 +112,24 @@ app.get("/api/safety-brief/brief", (req, res) => {
             }
         });
     /**
+     * BRIEF by usr_id
+     * /api/safety-brief/brief?usrID=2
+     */
+    } else if (req.query.usrID) {
+        const usrID = req.query.usrID;
+        pool.query(`SELECT * FROM brief WHERE usr_id = $1`, [usrID], (err, result) => {
+            if (err) {
+                console.error(err);
+                res.status(500).send(`Error reading BRIEF table`);
+            } else if (result.rows.length === 0) {
+                console.log(`Brief for usr_id ${usrID} was not found`);
+                res.status(404).send(`Brief for usr_id ${usrID} was not found`);
+            } else {
+                console.log(result.rows);
+                res.json(result.rows);
+            }
+        });
+    /**
      * All BRIEFs ordered by title
      * /api/safety-brief/brief
      */

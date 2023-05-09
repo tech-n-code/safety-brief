@@ -26,8 +26,12 @@ DELETE http://localhost:3000/api/safety-brief/usr/3
 GET http://localhost:3000/api/safety-brief/brief
 
 
-### BRIEF by id
-GET http://localhost:3000/api/safety-brief/brief?id=7
+### BRIEF by brief_id
+GET http://localhost:3000/api/safety-brief/brief?id=2
+
+
+### BRIEF by usr_id
+GET http://localhost:3000/api/safety-brief/brief?usrID=2
 
 
 ### Create BRIEF
