@@ -11,7 +11,6 @@ function BriefCard(props) {
             const response = await fetch("http://localhost:3000/api/safety-brief/dont?briefID=" + props.id);
             const data = await response.json();
             setCuesData(data);
-            // console.log(cuesData);
         }
         fetchData();
     }, [props.id]);
@@ -21,7 +20,6 @@ function BriefCard(props) {
             const response = await fetch("http://localhost:3000/api/safety-brief/fave?usrID=" + props.usr_id);
             const data = await response.json();
             setFavoriteCues(data);
-            console.log(data);
         }
         fetchFavorites();
     }, [props.usr_id]);
@@ -35,7 +33,7 @@ function BriefCard(props) {
             <div className="px-4 py-5 sm:px-6">
                 <h2 className="card-title">{props.title}</h2>
             </div>
-            <div className="border-t border-gray-200">
+            <div className="border-t border-gray-500">
                 <dl>
                     {cuesData.map((cueData) => (
                         <Cue
