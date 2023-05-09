@@ -23,12 +23,11 @@ app.use(function(req, res, next) {
 });
 
 app.options('*', (req, res) => {
-    res.set('Access-Control-Allow-Origin', 'http://localhost:5173/');
-    res.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.set('Access-Control-Allow-Origin', 'http://localhost:5173');
+    res.set('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');
     res.set('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With');
     res.status(200).send();
 });
-
 
 
 /**
@@ -298,19 +297,37 @@ app.post("/api/safety-brief/brief_dont", (req, res) => {
 });
 
 /**
+ * Update DONT in a BRIEF by <usr_id/dont_id>
+ * /api/safety-brief/brief_dont/1/3
+ */
+app.patch("/api/safety-brief/brief_dont/:briefID/:dontID", (req, res) => {
+    const { briefID, dontID } = req.params;
+    const { checked } = req.body;
+    pool.query("UPDATE brief_dont SET checked = COALESCE($1, checked) WHERE brief_id = $2 AND dont_id = $3 RETURNING *", [checked || false, briefID, dontID], (err, result) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send("Error updating cheched DONTs in BRIEF");
+        } else {
+            console.log(result.rows);
+            console.log(`DONT id ${result.rows[0].dont_id} in BRIEF id ${result.rows[0].brief_id} check is now: ${result.rows[0].checked}`);
+            res.status(200).json(result.rows);
+        }
+    });
+});
+
+/**
  * Delete DONT from BRIEF by <brief_id/dont_id>
  * /api/safety-brief/brief_dont/3/10
  */
 app.delete("/api/safety-brief/brief_dont/:briefID/:dontID", (req, res) => {
-    const briefID = req.params.briefID;
-    const dontID = req.params.dontID;
+    const { briefID, dontID } = req.params;
     pool.query("DELETE FROM brief_dont WHERE brief_id = $1 AND dont_id = $2 RETURNING *", [briefID, dontID], (err, result) => {
         if (err) {
             console.error(err);
             res.status(500).send("Error deleting DONT");
         } else {
             console.log(result.rows);
-            console.log(`DONT with usr_id ${result.rows[0].id} deleted successfully`); //'undefined'?
+            console.log(`DONT id ${result.rows[0].dont_id} deleted from BRIEF id ${result.rows[0].brief_id} successfully`);
             res.status(200).json(result.rows);
         }
     });
@@ -348,7 +365,7 @@ app.post("/api/safety-brief/fave", (req, res) => {
             res.status(500).send("Error adding FAVE");
         } else {
             console.log(result.rows);
-            console.log("FAVE added successfully");
+            console.log(`FAVE for dont_id ${result.rows[0].dont_id} added to USER id ${result.rows[0].usr_id} successfully`);
             res.status(200).json(result.rows);
         }
     });
@@ -359,15 +376,14 @@ app.post("/api/safety-brief/fave", (req, res) => {
  * /api/safety-brief/fave/2/7
  */
 app.delete("/api/safety-brief/fave/:usrID/:dontID", (req, res) => {
-    const usrID = req.params.usrID;
-    const dontID = req.params.dontID;
+    const { usrID, dontID } = req.params;
     pool.query("DELETE FROM fave WHERE usr_id = $1 AND dont_id = $2 RETURNING *", [usrID, dontID], (err, result) => {
         if (err) {
             console.error(err);
             res.status(500).send("Error deleting FAVE");
         } else {
             console.log(result.rows);
-            console.log(`FAVE with usr_id ${result.rows[0].id} deleted successfully`); //'undefined'?
+            console.log(`FAVE for dont_id ${result.rows[0].dont_id} removed from USER id ${result.rows[0].usr_id} successfully`);
             res.status(200).json(result.rows);
         }
     });
