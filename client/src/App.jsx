@@ -6,43 +6,25 @@ function App() {
 
     return (
         <>
+            <Navigation/>
             <Dashboard/>
         </>
-    )
+    );
 }
 
 function Navigation() {
 
     return (
-        <div className="navbar flex bg-base-100 rounded-box">
+        <div className="navbar flex bg-base-300 rounded-box">
             <div className="justify-end px-2">
-                <a className="text-lg font-bold">Safety Brief!</a>
+                <a className="text-3xl font-bold">Safety Brief!</a>
             </div> 
             <div className="flex justify-end flex-1 px-2">
+                <DropDown/>
             </div>
         </div>
     );
 }
-
-function DropDown() {
-    return (
-        <div className="dropdown dropdown-end">
-            
-            <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-                <li>
-                    <a className="justify-between">
-                        Profile
-                        <span className="badge">New</span>
-                    </a>
-                </li>
-                <li><a>Settings</a></li>
-                <li><a>Logout</a></li>
-            </ul>
-            <Avatar />
-        </div>
-    );
-}
-
 
 function Avatar() {
     return (
@@ -54,5 +36,16 @@ function Avatar() {
     );
 }
 
+function DropDown() {
+    return (
+        <div className="dropdown dropdown-end">
+            <Avatar />
+            <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+                <li><a>New Brief</a></li>
+                <li><a>Logout</a></li>
+            </ul>
+        </div>
+    );
+}
 
-export default App
+export default App;
