@@ -5,6 +5,7 @@ import NewBrief from './NewBrief'
 
 function App() {
     const [showNewBriefForm, setShowNewBriefForm] = useState(false);
+    const [authUserID, setAuthUserID] = useState(2);
     
     const handleNewBriefClick = () => {
         setShowNewBriefForm(true);
@@ -13,8 +14,14 @@ function App() {
     return (
         <>
             <Navigation handleNewBriefClick={handleNewBriefClick} />
-            {showNewBriefForm && <NewBrief />}
-            <Dashboard />
+                {showNewBriefForm && <NewBrief 
+                    authUserID={authUserID}
+                    setAuthUserID={setAuthUserID}
+                />}
+            <Dashboard
+                authUserID={authUserID}
+                setAuthUserID={setAuthUserID}
+            />
         </>
     );
 }
