@@ -71,7 +71,16 @@ Content-Type: application/json
 {
     "brief_id": 4,
     "cat": "Long Driving Trip",
-    "num_donts": 2
+    "num_donts": 3
+}
+
+
+### Update DONT in a BRIEF by <usr_id/dont_id>
+PATCH http://localhost:3000/api/safety-brief/brief_dont/1/3
+Content-Type: application/json
+
+{
+    "checked": true
 }
 
 
