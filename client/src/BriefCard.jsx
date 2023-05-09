@@ -2,18 +2,33 @@ import { useState, useEffect } from "react";
 import Cue from './Cue';
 
 function BriefCard(props) {
-    console.log(props.id)
+    console.log(props)
     const [cuesData, setCuesData] = useState([]);
-  
+    const [favoriteCues, setFavoriteCues] = useState([]);
+ 
     useEffect(() => {
         async function fetchData() {
             const response = await fetch("http://localhost:3000/api/safety-brief/dont?briefID=" + props.id);
             const data = await response.json();
             setCuesData(data);
-            console.log(cuesData);
+            // console.log(cuesData);
         }
         fetchData();
     }, [props.id]);
+
+    useEffect(() => {
+        async function fetchFavorites() {
+            const response = await fetch("http://localhost:3000/api/safety-brief/fave?usrID=" + props.usr_id);
+            const data = await response.json();
+            setFavoriteCues(data);
+            console.log(data);
+        }
+        fetchFavorites();
+    }, [props.usr_id]);
+
+    const removeCue = (cueId) => {
+        setCuesData(cuesData.filter(cueData => cueData.id !== cueId));
+    }
 
     return (
         <div className="card bg-base-100 shadow-xl overflow-hidden sm:rounded-lg">
@@ -29,15 +44,16 @@ function BriefCard(props) {
                             cat={cueData.cat}
                             descr={cueData.descr}
                             checked={cueData.checked}
-                            usr_id={cueData.usr_id}
+                            usr_id={props.usr_id}
                             brief_id={props.id}
+                            isFavorite={favoriteCues.some(fav => fav.dont_id === cueData.id)}
+                            removeCue={removeCue}
                         />
                     ))}
                 </dl>
             </div>
         </div>
     );
-
 }
 
 export default BriefCard;
