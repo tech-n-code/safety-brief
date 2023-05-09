@@ -1,35 +1,58 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import Dashboard from './Dashboard';
 
 function App() {
-  const [count, setCount] = useState(0)
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    return (
+        <>
+            <Dashboard/>
+        </>
+    )
 }
+
+function Navigation() {
+
+    return (
+        <div className="navbar flex bg-base-100 rounded-box">
+            <div className="justify-end px-2">
+                <a className="text-lg font-bold">Safety Brief!</a>
+            </div> 
+            <div className="flex justify-end flex-1 px-2">
+            </div>
+        </div>
+    );
+}
+
+function DropDown() {
+    return (
+        <div className="dropdown dropdown-end">
+            
+            <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+                <li>
+                    <a className="justify-between">
+                        Profile
+                        <span className="badge">New</span>
+                    </a>
+                </li>
+                <li><a>Settings</a></li>
+                <li><a>Logout</a></li>
+            </ul>
+            <Avatar />
+        </div>
+    );
+}
+
+
+function Avatar() {
+    return (
+        <div className="btn btn-circle btn-primary avatar">
+            <div tabIndex={0} className="w-24 rounded-full">
+                <img src="https://xsgames.co/randomusers/assets/avatars/male/78.jpg" />
+            </div>
+        </div>
+    );
+}
+
 
 export default App
