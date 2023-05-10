@@ -1,6 +1,8 @@
 import express from "express";
 import dotenv from "dotenv";
 import pg from "pg";
+import cors from "cors";
+
 const { Pool } = pg;
 
 const app = express();
@@ -10,25 +12,12 @@ const port = process.env.PORT || 3000;
 
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
-    max: 50
+    max: 10
 });
 
 app.use(express.json());
 
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-    next();
-});
-
-app.options('*', (req, res) => {
-    res.set('Access-Control-Allow-Origin', 'http://localhost:5173');
-    res.set('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');
-    res.set('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With');
-    res.status(200).send();
-});
-
+app.use(cors());
 
 /**
  * USER by ID
